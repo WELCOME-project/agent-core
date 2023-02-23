@@ -1,0 +1,25 @@
+version: "3.7"
+
+networks: 
+    proxy: 
+      external: true
+
+services:
+    agent-core:
+        build: .
+        image: agent-core:v8.3
+        working_dir: /app/executionservice
+        ports:
+            - 8060:8060
+        environment:
+            - notificationUrl=http://localhost:3000/welcome/ajanNotification
+            - notificationHeaderKeys=X-User-ID
+            - notificationHeaderValues=agent-c2c2f4f1-3dda-4210-b7a7-ad27547d3c72
+            - servicesOfferFolderPath=./welcome/services/offers
+            - servicesRequestFolderPath=./welcome/services/request
+        command: java -Dpf4j.mode=development -Dpf4j.pluginsDir=../pluginsystem/plugins -jar target/executionservice-0.1.jar --triplestore.url="http://localhost:8080/rdf4j-server" --server.port=8060 --loadTTLFiles=false
+        extra_hosts:
+          - "localhost:XXX.XXX.XXX.XX"
+
+
+
