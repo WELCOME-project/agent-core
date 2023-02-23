@@ -1,0 +1,9 @@
+de\dfki\asr\ajan\pluginsystem\mappingplugin\extensions\package-info.class
+de\dfki\asr\ajan\pluginsystem\mappingplugin\vocabularies\MappingVocabulary.class
+de\dfki\asr\ajan\pluginsystem\mappingplugin\utils\MappingUtil.class
+de\dfki\asr\ajan\pluginsystem\mappingplugin\exceptions\RMLMapperException.class
+de\dfki\asr\ajan\pluginsystem\mappingplugin\exceptions\JSONMappingException.class
+de\dfki\asr\ajan\pluginsystem\mappingplugin\extensions\QueryJsonDomain.class
+META-INF\extensions.idx
+de\dfki\asr\ajan\pluginsystem\mappingplugin\MappingPlugin.class
+de\dfki\asr\ajan\pluginsystem\mappingplugin\extensions\HandleJsonEvent.class

@@ -1,0 +1,15 @@
+de\dfki\asr\ajan\pluginsystem\aspplugin\exception\MalformedStatementException.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\extensions\package-info.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\util\Deserializer.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\extensions\Problem.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\util\PatternUtil.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\extensions\ASPRules.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\extensions\Constant.class
+META-INF\extensions.idx
+de\dfki\asr\ajan\pluginsystem\aspplugin\exception\BeliefBaseUpdateException.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\util\ASPConfig.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\util\Serializer.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\extensions\ClingoConfig.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\ASPPlugin.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\extensions\ASPWrite.class
+de\dfki\asr\ajan\pluginsystem\aspplugin\exception\ClingoException.class
