@@ -1,0 +1,5 @@
+de\dfki\asr\ajan\pluginsystem\AJANPluginLoader.class
+de\dfki\asr\ajan\pluginsystem\extensionpoints\AbstractBranchTask.class
+de\dfki\asr\ajan\pluginsystem\extensionpoints\NodeExtension.class
+de\dfki\asr\ajan\pluginsystem\extensionpoints\AbstractDecorator.class
+de\dfki\asr\ajan\pluginsystem\extensionpoints\EndpointExtension.class
