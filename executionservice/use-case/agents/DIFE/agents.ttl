@@ -1,0 +1,632 @@
+# @base <http://localhost/rdf4j/repositories/agents> .
+
+@prefix : <http://localhost:8090/rdf4j/repositories/agents#> .
+@prefix behaviors: <http://localhost:8090/rdf4j/repositories/behaviors#> .
+@prefix beliefs: <http://localhost:8090/rdf4j/repositories/beliefs#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix http: <http://www.w3.org/2011/http#> .
+@prefix ajan: <http://www.ajan.de/ajan-ns#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix test: <http://test/> .
+@prefix mosim: <http://www.dfki.de/mosim-ns#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+# ----------- Endpoint ------------
+
+# localhost:8080/ajan/agents/ | POST | text/turtle
+
+# ------------- Body --------------
+
+#@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+#@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+#@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+#@prefix ajan: <http://www.ajan.de/ajan-ns#> .
+#@prefix inv: <http://www.dfki.de/inversiv#> .
+#@prefix : <http://www.dfki.de/inversiv#> .
+#@prefix bt: <http://www.ajan.de/behavior/bt-ns#> .
+#@prefix http: <http://www.w3.org/2006/http#> .
+#@prefix test: <http://test/> .
+#
+#:initialization rdf:type ajan:AgentInitialisation ;
+#				ajan:agentName "Agento"^^xsd:string ;
+#				ajan:agentTemplate <http://localhost:8090/rdf4j/repositories/agents#ExampleAgent> ;
+#				ajan:agentInitKnowledge test:Subject  .
+#
+#test:Subject rdf:type test:Resource .
+#test:Subject test:predicate "Geh weg!" .
+
+
+# ----------- Templates -----------
+
+:DIFEWelcomeAgent
+	a ajan:AgentTemplate ;
+	rdfs:label "DIFEWelcomeAgent" ;
+	ajan:event :PopulateLSREvent ;
+	ajan:event :PopulateLAREvent ;		
+	ajan:event :SpecificBTEvent ;	
+	ajan:event :FirstInteractionBTEvent ;	
+	ajan:event :AgentMonitoringEvent ;
+	ajan:event :ErrorHandlingEvent ;
+	ajan:event :ReceiveLocalServicesEvent ;	
+	ajan:event :ReceiveLocalAgentsEvent ;	
+	ajan:event :ReceiveHandshakeEvent ;	
+	ajan:event :SpeakAvatarEvent ;	
+	ajan:event :EventDIPORServiceRequest ;		
+	ajan:event :EventStatementNonOpinion ;	
+	ajan:event :CloseScenarioEvent ;
+	ajan:event :AlternativeCloseScenarioEvent ;	
+	ajan:event :ExternalFAQEvent ;	
+	ajan:event :InternalFAQEvent ;	
+	ajan:event :ReceiveKMSNotificationS7Event ;	
+	ajan:event :CVCreationEvent ;	
+	ajan:event :FirstReceptionServiceEvent ;
+	ajan:event :SchoolingMasterEvent ;
+	ajan:event :InformSubTopicEvent ;
+	ajan:event :AgentShutdownEvent ;
+	
+	ajan:endpoint :populateLAR ;
+	ajan:endpoint :populateLSR ;
+	ajan:endpoint :receiveSpeechAct ;
+	ajan:endpoint :speakAvatar ;
+	ajan:endpoint :handshake ;
+	ajan:endpoint :closeScenario ;
+	ajan:endpoint :foundExternalFAQ ;
+	ajan:endpoint :foundInternalFAQ ;
+	ajan:endpoint :KMSNotificationS7 ;
+    ajan:endpoint :agentSession ;
+	ajan:endpoint :heartbeat ;
+	ajan:endpoint :errorHandling ;
+	
+	ajan:initialBehavior :InitialWelcomeBehavior ;
+	ajan:finalBehavior :FinalWelcomeBehavior ;
+	ajan:behavior :HeartbeatMonitoringBT ;
+	ajan:behavior :ErrorHandlingBT ;	
+	ajan:behavior :PopulateLARRepos ;
+	ajan:behavior :PopulateLSRRepos ;
+	ajan:behavior :HandshakeBehavior ;
+	ajan:behavior :ProcessSpeechActsBehavior ;
+	ajan:behavior :GenericInteractionDIFEScenarioBT ;	
+	ajan:behavior :SpecificFirstReceptionBT ;
+	ajan:behavior :CloseFirstReceptionScenarioBT ;
+	ajan:behavior :SpecificCVCreationBT ;	
+	ajan:behavior :SpecificSchoolingBT ;
+	ajan:behavior :UMasterRecognitionSchoolingBT ;
+	ajan:behavior :ProfessionalSkillsRecognitionSchoolingBT ;
+	ajan:behavior :NonUQualificationSchoolingBT ;
+	ajan:behavior :ExternalFAQBT ;
+	ajan:behavior :InternalFAQBT ;
+	ajan:behavior :AgentShutdown ;
+	
+#---------LCC Related----------------------
+	ajan:event	:StartLccAssessmentEvent ;
+	ajan:event	:LccAssessmentCompleteEvent ;
+	ajan:event	:SubmitFinalLccResultEvent ;
+	ajan:event	:StartLccProcessEvent ;
+	ajan:event	:LccDedicatedAgentBehaviorEvent ;
+	ajan:event	:ReceiveLccPersonalInfoEvent ;
+	ajan:event	:ComputeLccCoalitionStructuresEvent ;
+	ajan:event	:ComputeLccUtilityValuesEvent ;
+	ajan:event	:ReceiveLccUtilityValuesEvent ;
+	ajan:event	:SolveLccEvent ;
+	ajan:event	:FinalizeLccProcessEvent ;
+	ajan:event	:LccFailureEvent ;
+	ajan:endpoint	:StartLccAssessmentEndpoint ;
+	ajan:endpoint	:LccAssessmentCompleteEndpoint ;
+	ajan:endpoint	:SubmitFinalLccResultEndpoint ;
+	ajan:endpoint	:StartLccProcessEndpoint ;
+	ajan:endpoint	:ReceiveLccPersonalInfoEndpoint ;
+	ajan:endpoint	:ComputeLccUtilityValuesEndpoint ;
+	ajan:endpoint	:ReceiveLccUtilityValuesEndpoint ;
+	ajan:endpoint	:FinalizeLccProcessEndpoint ;
+	ajan:behavior	:StartLccAssessmentBehavior ;
+	ajan:behavior	:LccAssessmentCompleteBehavior ;
+	ajan:behavior	:SubmitFinalLccResultBehavior ;
+	ajan:behavior	:StartLccProcessBehavior ;
+	ajan:behavior	:LccDedicatedAgentBehavior ;
+	ajan:behavior	:ReceiveLccPersonalInfoBehavior ;
+	ajan:behavior	:ComputeLccCoalitionStructuresBehavior ;
+	ajan:behavior	:ComputeLccUtilityValuesBehavior ;
+	ajan:behavior	:ReceiveLccUtilityValuesBehavior ;
+	ajan:behavior	:SolveLccBehavior ;
+	ajan:behavior	:FinalizeLccProcessBehavior ;
+	ajan:behavior	:LccFailureBehavior ;
+	
+	ajan:event :TestQueueEvent ;
+	ajan:event :RequestInitiatorEvent ;
+	ajan:endpoint :TestQueueEventEndpoint ;
+	ajan:behavior :Request_Initiator_BT ;
+	ajan:behavior :TestQueueEventBehavior .
+
+# ----------- Behaviors -----------
+
+:InitialWelcomeBehavior
+	a ajan:InitialBehavior ;
+	rdfs:label "Initial Behavior" ;
+	ajan:bt behaviors:InitialWelcomeBehavior .
+
+:FinalWelcomeBehavior
+	a ajan:FinalBehavior ;
+	rdfs:label "Final Behavior" ;
+	ajan:bt behaviors:FinalWelcomeBehavior .
+
+:HeartbeatMonitoringBT
+	a ajan:Behavior ;
+	rdfs:label "Heartbeat Monitoring Behavior" ;
+	ajan:trigger :AgentMonitoringEvent ;
+	ajan:bt behaviors:HeartbeatMonitoringBT .
+
+:ErrorHandlingBT
+	a ajan:Behavior ;
+	rdfs:label "Error Handling Behavior" ;
+	ajan:trigger :ErrorHandlingEvent ;
+	ajan:bt behaviors:ErrorHandlingBT .
+
+:PopulateLARRepos
+	a ajan:Behavior ;
+	rdfs:label "Populate LAR Repos" ;
+	ajan:trigger :PopulateLAREvent ;
+	ajan:trigger :ReceiveLocalAgentsEvent ;
+	ajan:bt behaviors:PopulateLARRepos .
+
+:PopulateLSRRepos
+	a ajan:Behavior ;
+	rdfs:label "Populate LSR Repos" ;
+	ajan:trigger :PopulateLSREvent ;
+	ajan:trigger :ReceiveLocalServicesEvent ;
+	ajan:bt behaviors:PopulateLSRRepos .
+
+:HandshakeBehavior
+	a ajan:Behavior ;
+	rdfs:label "Handshake Behavior" ;
+	ajan:trigger :ReceiveHandshakeEvent ;	
+	ajan:bt behaviors:HandshakeBehavior .
+
+:ProcessSpeechActsBehavior
+	a ajan:Behavior ;
+	rdfs:label "Process Speech Acts Behavior" ;
+	ajan:trigger :SpeakAvatarEvent ;
+	ajan:trigger :EventDIPORServiceRequest ;
+	ajan:trigger :EventStatementNonOpinion ;
+	ajan:bt behaviors:ProcessSpeechActsBehavior .
+
+:GenericInteractionDIFEScenarioBT
+	a ajan:Behavior ;
+	rdfs:label "Generic Interaction DIFE Scenarios Behavior" ;
+	ajan:trigger :FirstInteractionBTEvent ;
+	ajan:trigger :SpecificBTEvent ;
+	ajan:bt behaviors:GenericInteractionDIFEScenarioBT .
+
+:SpecificFirstReceptionBT
+	a ajan:Behavior ;
+	rdfs:label "Specific First Reception Behavior Tree" ;
+	ajan:trigger :FirstReceptionServiceEvent ;
+	ajan:bt behaviors:SpecificFirstReceptionBT .
+	
+:CloseFirstReceptionScenarioBT
+	a ajan:Behavior ;
+	rdfs:label "Specific First Reception Closing Behavior Tree" ;
+	ajan:trigger :AlternativeCloseScenarioEvent ;
+	ajan:trigger :CloseScenarioEvent ;
+	ajan:bt behaviors:CloseFirstReceptionScenarioBT .
+
+:SpecificCVCreationBT
+	a ajan:Behavior ;
+	rdfs:label "Specific CV Creation Behavior" ;
+	ajan:trigger :ReceiveKMSNotificationS7Event ;
+	ajan:trigger :CVCreationEvent ;
+	ajan:bt behaviors:SpecificCVCreationBT .
+
+:SpecificSchoolingBT 
+	a ajan:Behavior ;
+	rdfs:label "Schooling BT - Master" ;
+	ajan:trigger :SchoolingMasterEvent ;
+	ajan:bt behaviors:SpecificSchoolingBT .
+	
+:UMasterRecognitionSchoolingBT 
+	a ajan:Behavior ;
+	rdfs:label "Schooling BT - University or Master Recognition Diploma" ;
+	ajan:trigger :InformSubTopicEvent ;
+	ajan:bt behaviors:UMasterRecognitionSchoolingBT .
+	
+:ProfessionalSkillsRecognitionSchoolingBT 
+	a ajan:Behavior ;
+	rdfs:label "Schooling BT - Professional Skills Recognition" ;
+	ajan:trigger :InformSubTopicEvent ;
+	ajan:bt behaviors:ProfessionalSkillsRecognitionSchoolingBT .
+	
+:NonUQualificationSchoolingBT 
+	a ajan:Behavior ;
+	rdfs:label "Schooling BT - Non University Qualification" ;
+	ajan:trigger :InformSubTopicEvent ;
+	ajan:bt behaviors:NonUQualificationSchoolingBT .
+	
+:ExternalFAQBT
+	a ajan:Behavior ;
+	rdfs:label "External FAQ Behavior Tree" ;
+	ajan:trigger :ExternalFAQEvent  ;
+	ajan:bt behaviors:ExternalFAQBT .
+
+:InternalFAQBT
+	a ajan:Behavior ;
+	rdfs:label "Internal FAQ Behavior Tree" ;
+	ajan:trigger :InternalFAQEvent  ;
+	ajan:bt behaviors:InternalFAQBT .
+	
+:AgentShutdown
+	a ajan:Behavior ;
+	rdfs:label "Agent Shutdown" ;
+	ajan:trigger :AgentShutdownEvent ;
+	ajan:bt behaviors:AgentShutdown .
+
+
+# ----------- Endpoints -----------
+
+:populateLAR
+	a ajan:Endpoint ;
+	rdfs:label "populate LAR Repo Endpoint" ;
+	ajan:capability "populateLAR" ;
+	ajan:event :ReceiveLocalAgentsEvent .
+
+:populateLSR
+	a ajan:Endpoint ;
+	rdfs:label "populate LSR Repo Endpoint" ;
+	ajan:capability "populateLSR" ;
+	ajan:event :ReceiveLocalServicesEvent .
+	
+:receiveSpeechAct
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS - DIPs" ;
+	ajan:capability "receiveSpeechAct" ;	
+	ajan:event :EventDIPORServiceRequest ;
+	ajan:event :EventStatementNonOpinion .
+
+:handshake
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS - Handshake" ;
+	ajan:capability "handshake" ;
+	ajan:event :ReceiveHandshakeEvent .
+
+:foundExternalFAQ
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS Notification - External FAQ" ;
+	ajan:capability "foundExternalFAQ" ;
+	ajan:event :ExternalFAQEvent  .
+
+:foundInternalFAQ
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS Notification - Internal FAQ" ;
+	ajan:capability "foundInternalFAQ" ;
+	ajan:event :InternalFAQEvent   .
+	
+:KMSNotificationS7
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS Notification - S7" ;
+	ajan:capability "KMSNotificationS7" ;
+	ajan:event :ReceiveKMSNotificationS7Event .
+	
+:speakAvatar
+	a ajan:Endpoint ;
+	rdfs:label "KMS Endpoint for speakAvatar" ;
+	ajan:capability "speakAvatar" ;
+	ajan:event :SpeakAvatarEvent .
+
+:closeScenario
+	a ajan:Endpoint ;
+	rdfs:label "KMS Endpoint for closeScenario" ;
+	ajan:capability "closeScenario" ;
+	ajan:event :CloseScenarioEvent .
+	
+:agentSession
+	a ajan:Endpoint ;
+	rdfs:label "Agent Session Endpoint" ;
+	ajan:capability "agentSession" ;
+	ajan:event :AgentShutdownEvent .
+
+:heartbeat
+	a ajan:Endpoint ;
+	rdfs:label "Heartbeat monitoring Endpoint" ;
+	ajan:capability "heartbeat" ;
+	ajan:event :AgentMonitoringEvent .
+
+:errorHandling
+	a ajan:Endpoint ;
+	rdfs:label "Error Handling Endpoint" ;
+	ajan:capability "errorHandling" ;
+	ajan:event :ErrorHandlingEvent .
+
+# ----------- Events -----------
+
+:PopulateLSREvent
+	a ajan:ModelEvent ;
+	rdfs:label "Populate LSR Event" .
+	
+:PopulateLAREvent
+	a ajan:ModelEvent ;
+	rdfs:label "Populate LAR Event" .
+
+:ReceiveLocalServicesEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Local Services Event" .
+	
+:ReceiveLocalAgentsEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Local Agents Event" .
+	
+:ReceiveHandshakeEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Handshake Event" .
+
+:SpeakAvatarEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Speak to Avatar Event" .
+	
+:EventDIPORServiceRequest
+	a ajan:ModelEvent ;
+	rdfs:label "Receive a DIP or Service Request Event" .
+
+:EventStatementNonOpinion
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Default Statement Non Opinion Event" .
+
+:FirstInteractionBTEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Receive First Service Interaction Move Event" .
+
+:SpecificBTEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Specific BT Event" .
+
+:FirstReceptionServiceEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Specific BT Event" .
+	
+:AlternativeCloseScenarioEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Alternative Close Scenario Event" .
+	
+:CloseScenarioEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Close Scenario Event" .
+
+:SchoolingMasterEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Schooling Master Behavior Event" .
+
+:InformSubTopicEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Inform Subtopic Behavior Event" .
+	
+:ExternalFAQEvent  
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Found External FAQ Event" .
+	
+:InternalFAQEvent  
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Found Internal FAQ Event" .
+	
+:ReceiveKMSNotificationS7Event
+	a ajan:ModelEvent ;
+	rdfs:label "Receive KMS Notification CV Document Created Event" .
+	
+:CVCreationEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Produce Create CV Scenario Event" .
+	
+:AgentShutdownEvent
+	a ajan:ModelEvent ;
+	rdfs:label "AgentShutdownEvent" .
+
+:AgentMonitoringEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Agent Monitoring Event" .
+
+:ErrorHandlingEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Error Handling Event" .
+	
+#------------MAJAN Stuff-------------------
+
+#----Behaviors-------
+:Request_Initiator_BT
+	a ajan:Behavior ;
+	rdfs:label "Request Initiator Behavior" ;
+	ajan:trigger :RequestInitiatorEvent ;
+	ajan:bt behaviors:RequestInitiatorBT .
+	
+:StartLccAssessmentBehavior
+	a ajan:Behavior ;
+	rdfs:label "Start LCC Assessment Behavior" ;
+	ajan:trigger :StartLccAssessmentEvent ;
+	ajan:bt behaviors:StartLccAssessmentBt .
+
+:LccAssessmentCompleteBehavior
+	a ajan:Behavior ;
+	rdfs:label "LCC Assessment Complete Behavior" ;
+	ajan:trigger :LccAssessmentCompleteEvent ;
+	ajan:bt behaviors:LccAssessmentCompleteBt .
+
+:SubmitFinalLccResultBehavior
+	a ajan:Behavior ;
+	rdfs:label "Submit Final Lcc Result Behavior" ;
+	ajan:trigger :SubmitFinalLccResultEvent ;
+	ajan:bt behaviors:SubmitFinalLccResultBt .
+
+:StartLccProcessBehavior
+	a ajan:Behavior ;
+	rdfs:label "Start LCC Process Behavior" ;
+	ajan:trigger :StartLccProcessEvent ;
+	ajan:bt behaviors:StartLccProcessBt .
+
+:LccDedicatedAgentBehavior
+	a ajan:Behavior ;
+	rdfs:label "Behavior of Dedicated Agent for LCC" ;
+	ajan:trigger :LccDedicatedAgentBehaviorEvent ;
+	ajan:bt behaviors:LccDedicatedAgentBt .
+
+:ReceiveLccPersonalInfoBehavior
+	a ajan:Behavior ;
+	rdfs:label "Receive LCC Personal Info Behavior" ;
+	ajan:trigger :ReceiveLccPersonalInfoEvent ;
+	ajan:bt behaviors:ReceiveLccPersonalInfoBt .
+
+:ComputeLccCoalitionStructuresBehavior
+	a ajan:Behavior ;
+	rdfs:label "Compute LCC Coalition Structures Behavior" ;
+	ajan:trigger :ComputeLccCoalitionStructuresEvent ;
+	ajan:bt behaviors:ComputeLccCoalitionStructuresBt .
+
+:ComputeLccUtilityValuesBehavior
+	a ajan:Behavior ;
+	rdfs:label "Compute LCC Utility Values Behavior" ;
+	ajan:trigger :ComputeLccUtilityValuesEvent ;
+	ajan:bt behaviors:ComputeLccUtilityValuesBt .
+
+:ReceiveLccUtilityValuesBehavior
+	a ajan:Behavior ;
+	rdfs:label "Receive LCC Utility Values Behavior" ;
+	ajan:trigger :ReceiveLccUtilityValuesEvent ;
+	ajan:bt behaviors:ReceiveLccUtilityValuesBt .
+
+:SolveLccBehavior
+	a ajan:Behavior ;
+	rdfs:label "Solve LCC Behavior" ;
+	ajan:trigger :SolveLccEvent ;
+	ajan:bt behaviors:SolveLccBt .
+
+:FinalizeLccProcessBehavior
+	a ajan:Behavior ;
+	rdfs:label "Finalize LCC Process Behavior" ;
+	ajan:trigger :FinalizeLccProcessEvent ;
+	ajan:bt behaviors:FinalizeLccProcessBt .
+
+:LccFailureBehavior
+	a ajan:Behavior ;
+	rdfs:label "LCC Failed Behavior" ;
+	ajan:trigger :LccFailureEvent ;
+	ajan:bt behaviors:LccFailureBt .
+
+:TestQueueEventBehavior
+	a ajan:Behavior ;
+	rdfs:label "Test Queue Event Behavior" ;
+	ajan:trigger :TestQueueEvent ;
+	ajan:bt behaviors:TestQueueBT.
+
+#----Behaviors-------
+
+#----Endpoints-------
+:StartLccAssessmentEndpoint
+	a ajan:Endpoint ;
+	rdfs:label "Start LCC Assessment phase Endpoint" ;
+	ajan:capability "Assessment" ;
+	ajan:event :StartLccAssessmentEvent .
+
+:LccAssessmentCompleteEndpoint
+	a ajan:Endpoint ;
+	rdfs:label "LCC Assessment phase completed Endpoint" ;
+	ajan:capability "assessmentComplete" ;
+	ajan:event :LccAssessmentCompleteEvent .
+
+:SubmitFinalLccResultEndpoint
+	a ajan:Endpoint ;
+	rdfs:label "Submit LCC Final Result Endpoint" ;
+	ajan:capability "Final-Group" ;
+	ajan:event :SubmitFinalLccResultEvent .
+
+:StartLccProcessEndpoint
+	a ajan:Endpoint ;
+	rdfs:label "Start LCC Process Endpoint" ;
+	ajan:capability "TCN-Group" ;
+	ajan:event :StartLccProcessEvent .
+
+:ReceiveLccPersonalInfoEndpoint
+	a ajan:Endpoint ;
+	rdfs:label "Receive LCC Personal Info Endpoint" ;
+	ajan:capability "receiveLccPersonalInfo" ;
+	ajan:event :ReceiveLccPersonalInfoEvent .
+
+:ComputeLccUtilityValuesEndpoint
+	a ajan:Endpoint ;
+	rdfs:label "Compute LCC Utility Values Endpoint" ;
+	ajan:capability "computeLccUtilityValues" ;
+	ajan:event :ComputeLccUtilityValuesEvent .
+
+:ReceiveLccUtilityValuesEndpoint
+	a ajan:Endpoint ;
+	rdfs:label "Receive LCC Utility Values Endpoint" ;
+	ajan:capability "receiveLccUtilityValues" ;
+	ajan:event :ReceiveLccUtilityValuesEvent .
+
+:FinalizeLccProcessEndpoint
+	a ajan:Endpoint ;
+	rdfs:label "Finalize LCC Process Endpoint" ;
+	ajan:capability "finalizeLccProcess" ;
+	ajan:event :FinalizeLccProcessEvent .
+
+:TestQueueEventEndpoint 
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint to test queue event Behavior" ;
+	ajan:capability "testQueueEvent" ;
+	ajan:event :TestQueueEvent .
+
+#----Endpoints-------
+
+#----Events-------
+
+:RequestInitiatorEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Request Initiator BT Event" .
+
+:StartLccAssessmentEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Start LCC Assessment Phase Event" .
+		
+:LccAssessmentCompleteEvent
+	a ajan:ModelEvent ;
+	rdfs:label "LCC Assessment Phase Completed Event" .
+
+:SubmitFinalLccResultEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Submission of LCC Final Result Event" .
+	
+:StartLccProcessEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Start LCC Process Event" .
+
+:LccDedicatedAgentBehaviorEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "LCC Dedicated Agent Behavior Event" .
+
+:ReceiveLccPersonalInfoEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Receive LCC Personal Info Event" .
+
+:ComputeLccCoalitionStructuresEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Compute LCC Coalition Structures Event" .
+
+:ComputeLccUtilityValuesEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Compute LCC Utility Values Event" .
+
+:ReceiveLccUtilityValuesEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Receive LCC Utility Values Event" .
+
+:SolveLccEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Solve LCC Event" .
+
+:FinalizeLccProcessEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Finalize LCC Process Event" .
+
+:LccFailureEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "LCC Process Failed Event" .
+
+:TestQueueEvent
+	a ajan:ModelQueueEvent ;
+	rdfs:label "Test Queue Event" .

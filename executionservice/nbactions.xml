@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>run</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+                <exec.executable>java</exec.executable>
+                <exec.mainClass>de.dfki.asr.ajan.Application</exec.mainClass>
+                <exec.vmArgs>-Dtriplestore.initialData.agentFolderPath=../executionservice/use-case/agents -Dtriplestore.initialData.domainFolderPath=../executionservice/use-case/domains -Dtriplestore.initialData.serviceFolderPath=../executionservice/use-case/services -Dtriplestore.initialData.behaviorsFolderPath=../executionservice/use-case/behaviors -Dpf4j.mode=development -Dserver.port=8060 -DloadTTLFiles=false -Dpf4j.pluginsDir=../pluginsystem/plugins -Dtriplestore.url=http://localhost:8090/rdf4j -DnotificationHeaderValues=value1,value2,value3 -DnotificationHeaderKeys=key1,key2,key3 -DnotificationUrl=http://localhost:3000/welcome/ajanNotification -DservicesOfferFolderPath=./welcome/services/offers -DservicesRequestFolderPath=./welcome/services/request</exec.vmArgs>
+                <exec.appArgs></exec.appArgs>
+            </properties>
+        </action>
+        <action>
+            <actionName>debug</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+                <exec.executable>java</exec.executable>
+                <jpda.listen>true</jpda.listen>
+                <exec.mainClass>de.dfki.asr.ajan.Application</exec.mainClass>
+                <exec.vmArgs>-Dtriplestore.initialData.agentFolderPath=../executionservice/use-case/agents -Dtriplestore.initialData.domainFolderPath=../executionservice/use-case/domains -Dtriplestore.initialData.serviceFolderPath=../executionservice/use-case/services -Dtriplestore.initialData.behaviorsFolderPath=../executionservice/use-case/behaviors -Dpf4j.mode=development -Dserver.port=8060 -DloadTTLFiles=false -Dpf4j.pluginsDir=../pluginsystem/plugins -Dtriplestore.url=http://localhost:8090/rdf4j -DnotificationHeaderValues=value1,value2,value3 -DnotificationHeaderKeys=key1,key2,key3 -DnotificationUrl=http://localhost:3000/welcome/ajanNotification -DservicesOfferFolderPath=./welcome/services/offers -DservicesRequestFolderPath=./welcome/services/request -agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</exec.vmArgs>
+                <exec.appArgs></exec.appArgs>
+            </properties>
+        </action>
+        <action>
+            <actionName>profile</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+                <exec.executable>java</exec.executable>
+                <exec.mainClass>de.dfki.asr.ajan.Application</exec.mainClass>
+                <exec.vmArgs>-Dtriplestore.initialData.agentFolderPath=../executionservice/use-case/agents -Dtriplestore.initialData.domainFolderPath=../executionservice/use-case/domains -Dtriplestore.initialData.serviceFolderPath=../executionservice/use-case/services -Dtriplestore.initialData.behaviorsFolderPath=../executionservice/use-case/behaviors -Dpf4j.mode=development -Dserver.port=8060 -DloadTTLFiles=false -Dpf4j.pluginsDir=../pluginsystem/plugins -Dtriplestore.url=http://localhost:8090/rdf4j -DnotificationHeaderValues=value1,value2,value3 -DnotificationHeaderKeys=key1,key2,key3 -DnotificationUrl=http://localhost:3000/welcome/ajanNotification -DservicesOfferFolderPath=./welcome/services/offers -DservicesRequestFolderPath=./welcome/services/request</exec.vmArgs>
+                <exec.appArgs></exec.appArgs>
+            </properties>
+        </action>
+    </actions>

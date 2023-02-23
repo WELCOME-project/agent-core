@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:service="http://www.daml.org/services/owl-s/1.1/Service.owl#"
+	xmlns:process="http://www.daml.org/services/owl-s/1.1/Process.owl#"
+	xmlns:profile="http://www.daml.org/services/owl-s/1.1/Profile.owl#"
+	xmlns:welcome="https://raw.githubusercontent.com/gtzionis/WelcomeOntology/main/welcome.ttl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+<rdf:Description rdf:about="http://localhost:8060/welcome/integration/coordination/ajan/agents/welcome/services/FullPreregistration.owl">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+	<owl:imports rdf:resource="http://www.daml.org/services/owl-s/1.1/Service.owl"/>
+	<owl:imports rdf:resource="http://www.daml.org/services/owl-s/1.1/Process.owl"/>
+	<owl:imports rdf:resource="http://www.daml.org/services/owl-s/1.1/Profile.owl"/>
+	<rdfs:comment>"Information on the PRAKSIS full-preregistration procedure"</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://localhost:8060/welcome/integration/coordination/ajan/agents/welcome/services/FullPreregistration.owl#fullAsylumRegistration">
+	<rdf:type rdf:resource="http://www.daml.org/services/owl-s/1.1/Service.owl#Service"/>
+	<service:describedBy rdf:resource="http://localhost:8060/welcome/integration/coordination/ajan/agents/welcome/services/FullPreregistration.owl#fullpreregistration"/>
+	<service:presents rdf:resource="http://localhost:8060/welcome/integration/coordination/ajan/agents/welcome/services/FullPreregistration.owl#fullRegistrationProfile"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://localhost:8060/welcome/integration/coordination/ajan/agents/welcome/services/FullPreregistration.owl#fullpreregistration">
+	<rdf:type rdf:resource="http://www.daml.org/services/owl-s/1.1/Process.owl#AtomicProcess"/>
+	<service:describes rdf:resource="http://localhost:8060/welcome/integration/coordination/ajan/agents/welcome/services/FullPreregistration.owl#fullAsylumRegistration"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://localhost:8060/welcome/integration/coordination/ajan/agents/welcome/services/FullPreregistration.owl#fullRegistrationProfile">
+	<rdf:type rdf:resource="http://www.daml.org/services/owl-s/1.1/Profile.owl#Profile"/>
+	<service:presentedBy rdf:resource="http://localhost:8060/welcome/integration/coordination/ajan/agents/welcome/services/FullPreregistration.owl#fullAsylumRegistration"/>
+	<profile:textDescription>Legal service assistance asylum PRAKSIS procedure Greece pre registration full registration</profile:textDescription>
+	<profile:serviceName>PRAKSIS full preregistration procedure</profile:serviceName>
+</rdf:Description>
+
+</rdf:RDF>

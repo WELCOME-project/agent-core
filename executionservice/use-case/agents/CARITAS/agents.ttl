@@ -1,0 +1,348 @@
+# @base <http://localhost/rdf4j/repositories/agents> .
+
+@prefix : <http://localhost:8090/rdf4j/repositories/agents#> .
+@prefix behaviors: <http://localhost:8090/rdf4j/repositories/behaviors#> .
+@prefix beliefs: <http://localhost:8090/rdf4j/repositories/beliefs#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix http: <http://www.w3.org/2011/http#> .
+@prefix ajan: <http://www.ajan.de/ajan-ns#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix test: <http://test/> .
+@prefix mosim: <http://www.dfki.de/mosim-ns#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+# ----------- Endpoint ------------
+
+# localhost:8080/ajan/agents/ | POST | text/turtle
+
+# ------------- Body --------------
+
+#@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+#@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+#@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+#@prefix ajan: <http://www.ajan.de/ajan-ns#> .
+#@prefix inv: <http://www.dfki.de/inversiv#> .
+#@prefix : <http://www.dfki.de/inversiv#> .
+#@prefix bt: <http://www.ajan.de/behavior/bt-ns#> .
+#@prefix http: <http://www.w3.org/2006/http#> .
+#@prefix test: <http://test/> .
+#
+#:initialization rdf:type ajan:AgentInitialisation ;
+#				ajan:agentName "Agento"^^xsd:string ;
+#				ajan:agentTemplate <http://localhost:8090/rdf4j/repositories/agents#ExampleAgent> ;
+#				ajan:agentInitKnowledge test:Subject  .
+#
+#test:Subject rdf:type test:Resource .
+#test:Subject test:predicate "Geh weg!" .
+
+
+# ----------- Templates -----------
+
+:CARITASWelcomeAgent
+	a ajan:AgentTemplate ;
+	rdfs:label "CARITAS WelcomeAgent" ;
+	ajan:event :PopulateLSREvent ;
+	ajan:event :PopulateLAREvent ;
+	ajan:event :SpecificBTEvent ;
+	ajan:event :FirstInteractionBTEvent ;
+	ajan:event :AgentMonitoringEvent ;
+	ajan:event :ErrorHandlingEvent ;	
+	ajan:event :ReceiveLocalServicesEvent ;
+	ajan:event :ReceiveLocalAgentsEvent ;
+	ajan:event :ReceiveHandshakeEvent ;	
+	ajan:event :SpeakAvatarEvent ;	
+	ajan:event :EventDIPORServiceRequest ;	
+	ajan:event :EventStatementNonOpinion ;	
+	ajan:event :ExternalFAQEvent ;	
+	ajan:event :InternalFAQEvent ;	
+	ajan:event :ReceiveKMSNotificationS7Event ;	
+	ajan:event :CVCreationEvent ;
+	ajan:event :SchoolingMasterEvent ;
+	ajan:event :InformSubTopicEvent ;
+	ajan:event :AgentShutdownEvent ;
+		
+	ajan:endpoint :populateLAR ;
+	ajan:endpoint :populateLSR ;
+	ajan:endpoint :receiveSpeechAct ;
+	ajan:endpoint :speakAvatar ;
+	ajan:endpoint :handshake ;
+    ajan:endpoint :foundExternalFAQ ;
+	ajan:endpoint :foundInternalFAQ ;
+	ajan:endpoint :KMSNotificationS7 ;
+    ajan:endpoint :agentSession ;
+	ajan:endpoint :heartbeat ;
+	ajan:endpoint :errorHandling ;
+	
+	ajan:initialBehavior :InitialWelcomeBehavior ;
+	ajan:finalBehavior :FinalWelcomeBehavior ;
+	ajan:behavior :HeartbeatMonitoringBT ;
+	ajan:behavior :ErrorHandlingBT ;	
+	ajan:behavior :PopulateLARRepos ;
+	ajan:behavior :PopulateLSRRepos ;
+	ajan:behavior :HandshakeBehavior ;
+	ajan:behavior :ProcessSpeechActsBehavior ;
+	ajan:behavior :GenericInteractionCARITASScenarioBT ;	
+	ajan:behavior :SpecificSimulateAppointmentBT ;
+	ajan:behavior :SpecificCVCreationBT ;	
+	ajan:behavior :SpecificSchoolingBT ;
+	ajan:behavior :SchoolDegreeSchoolingBT ;
+	ajan:behavior :UniversityDiplomaRecognitionBT ;
+	ajan:behavior :ExternalFAQBT ;
+	ajan:behavior :InternalFAQBT ;
+	ajan:behavior :AgentShutdown .
+
+# ----------- Behaviors -----------
+
+:InitialWelcomeBehavior
+	a ajan:InitialBehavior ;
+	rdfs:label "Initial Behavior" ;
+	ajan:bt behaviors:InitialWelcomeBehavior .
+
+:FinalWelcomeBehavior
+	a ajan:FinalBehavior ;
+	rdfs:label "Final Behavior" ;
+	ajan:bt behaviors:FinalWelcomeBehavior .
+
+:HeartbeatMonitoringBT
+	a ajan:Behavior ;
+	rdfs:label "Heartbeat Monitoring Behavior" ;
+	ajan:trigger :AgentMonitoringEvent ;
+	ajan:bt behaviors:HeartbeatMonitoringBT .
+
+:ErrorHandlingBT
+	a ajan:Behavior ;
+	rdfs:label "Error Handling Behavior" ;
+	ajan:trigger :ErrorHandlingEvent ;
+	ajan:bt behaviors:ErrorHandlingBT .
+
+:PopulateLARRepos
+	a ajan:Behavior ;
+	rdfs:label "Populate LAR Repos" ;
+	ajan:trigger :PopulateLAREvent ;
+	ajan:trigger :ReceiveLocalAgentsEvent ;
+	ajan:bt behaviors:PopulateLARRepos .
+
+:PopulateLSRRepos
+	a ajan:Behavior ;
+	rdfs:label "Populate LSR Repos" ;
+	ajan:trigger :PopulateLSREvent ;
+	ajan:trigger :ReceiveLocalServicesEvent ;
+	ajan:bt behaviors:PopulateLSRRepos .
+
+:HandshakeBehavior
+	a ajan:Behavior ;
+	rdfs:label "Handshake Behavior" ;
+	ajan:trigger :ReceiveHandshakeEvent ;	
+	ajan:bt behaviors:HandshakeBehavior .
+	
+:ProcessSpeechActsBehavior
+	a ajan:Behavior ;
+	rdfs:label "Process Speech Acts Behavior" ;
+	ajan:trigger :SpeakAvatarEvent ;
+	ajan:trigger :EventDIPORServiceRequest ;
+	ajan:trigger :EventStatementNonOpinion ;
+	ajan:bt behaviors:ProcessSpeechActsBehavior .
+
+:GenericInteractionCARITASScenarioBT
+	a ajan:Behavior ;
+	rdfs:label "Generic Interaction CARITAS Scenarios Behavior" ;
+	ajan:trigger :FirstInteractionBTEvent ;
+	ajan:trigger :SpecificBTEvent ;
+	ajan:bt behaviors:GenericInteractionCARITASScenarioBT .
+
+:SpecificSimulateAppointmentBT
+	a ajan:Behavior ;
+	rdfs:label "Specific Simulate Appointment Behavior" ;
+	ajan:bt behaviors:SpecificSimulateAppointmentBT .
+
+:SpecificCVCreationBT
+	a ajan:Behavior ;
+	rdfs:label "Specific CV Creation Behavior" ;
+	ajan:trigger :ReceiveKMSNotificationS7Event ;
+	ajan:trigger :CVCreationEvent ;
+	ajan:bt behaviors:SpecificCVCreationBT .
+
+:SpecificSchoolingBT
+	a ajan:Behavior ;
+	rdfs:label "Specific Schooling Behavior" ;
+	ajan:trigger :SchoolingMasterEvent ;
+	ajan:bt behaviors:SpecificSchoolingBT .
+	
+:SchoolDegreeSchoolingBT
+	a ajan:Behavior ;
+	rdfs:label "School Degree Recognition" ;
+	ajan:trigger :InformSubTopicEvent ;
+	ajan:bt behaviors:SchoolDegreeSchoolingBT .
+	
+:UniversityDiplomaRecognitionBT
+	a ajan:Behavior ;
+	rdfs:label "University Diploma Recognition BT" ;
+	ajan:trigger :InformSubTopicEvent ;
+	ajan:bt behaviors:UniversityDiplomaRecognitionBT .
+
+:ExternalFAQBT
+	a ajan:Behavior ;
+	rdfs:label "External FAQ Behavior Tree" ;
+	ajan:trigger :ExternalFAQEvent  ;
+	ajan:bt behaviors:ExternalFAQBT .
+
+:InternalFAQBT
+	a ajan:Behavior ;
+	rdfs:label "Internal FAQ Behavior Tree" ;
+	ajan:trigger :InternalFAQEvent  ;
+	ajan:bt behaviors:InternalFAQBT .
+	
+:AgentShutdown
+	a ajan:Behavior ;
+	rdfs:label "Agent Shutdown" ;
+	ajan:trigger :AgentShutdownEvent ;
+	ajan:bt behaviors:AgentShutdown .
+
+# ----------- Endpoints -----------
+
+:populateLAR
+	a ajan:Endpoint ;
+	rdfs:label "populate LAR Repo Endpoint" ;
+	ajan:capability "populateLAR" ;
+	ajan:event :ReceiveLocalAgentsEvent .
+
+:populateLSR
+	a ajan:Endpoint ;
+	rdfs:label "populate LSR Repo Endpoint" ;
+	ajan:capability "populateLSR" ;
+	ajan:event :ReceiveLocalServicesEvent .
+	
+:receiveSpeechAct
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS - DIPs" ;
+	ajan:capability "receiveSpeechAct" ;	
+	ajan:event :EventDIPORServiceRequest ;
+	ajan:event :EventStatementNonOpinion .
+
+:handshake
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS - Handshake" ;
+	ajan:capability "handshake" ;
+	ajan:event :ReceiveHandshakeEvent .
+
+:foundExternalFAQ
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS Notification - External FAQ" ;
+	ajan:capability "foundExternalFAQ" ;
+	ajan:event :ExternalFAQEvent  .
+
+:foundInternalFAQ
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS Notification - Internal FAQ" ;
+	ajan:capability "foundInternalFAQ" ;
+	ajan:event :InternalFAQEvent   .
+	
+:KMSNotificationS7
+	a ajan:Endpoint ;
+	rdfs:label "Endpoint for KMS Notification - S7" ;
+	ajan:capability "KMSNotificationS7" ;
+	ajan:event :ReceiveKMSNotificationS7Event .
+	
+:speakAvatar
+	a ajan:Endpoint ;
+	rdfs:label "KMS Endpoint for speakAvatar" ;
+	ajan:capability "speakAvatar" ;
+	ajan:event :SpeakAvatarEvent .
+	
+:agentSession
+	a ajan:Endpoint ;
+	rdfs:label "Agent Session Endpoint" ;
+	ajan:capability "agentSession" ;
+	ajan:event :AgentShutdownEvent .
+
+:heartbeat
+	a ajan:Endpoint ;
+	rdfs:label "Heartbeat monitoring Endpoint" ;
+	ajan:capability "heartbeat" ;
+	ajan:event :AgentMonitoringEvent .
+
+:errorHandling
+	a ajan:Endpoint ;
+	rdfs:label "Error Handling Endpoint" ;
+	ajan:capability "errorHandling" ;
+	ajan:event :ErrorHandlingEvent .
+	
+# ----------- Events -----------
+:PopulateLSREvent
+	a ajan:ModelEvent ;
+	rdfs:label "Populate LSR Event" .
+	
+:PopulateLAREvent
+	a ajan:ModelEvent ;
+	rdfs:label "Populate LAR Event" .
+
+:ReceiveLocalServicesEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Local Services Event" .
+	
+:ReceiveLocalAgentsEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Local Agents Event" .
+	
+:ReceiveHandshakeEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Handshake Event" .
+
+:SpeakAvatarEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Speak to Avatar Event" .
+	
+:EventDIPORServiceRequest
+	a ajan:ModelEvent ;
+	rdfs:label "Receive a DIP or Service Request Event" .
+
+:EventStatementNonOpinion
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Default Statement Non Opinion Event" .
+
+:FirstInteractionBTEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Receive First Service Interaction Move Event" .
+
+:SpecificBTEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Specific BT Event" .
+
+:SchoolingMasterEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Schooling Master Behavior Event" .
+
+:InformSubTopicEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Inform Subtopic Behavior Event" .
+
+:ExternalFAQEvent  
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Found External FAQ Event" .
+	
+:InternalFAQEvent  
+	a ajan:ModelEvent ;
+	rdfs:label "Receive Found Internal FAQ Event" .
+	
+:ReceiveKMSNotificationS7Event
+	a ajan:ModelEvent ;
+	rdfs:label "Receive KMS Notification CV Document Created Event" .
+	
+:CVCreationEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Produce Create CV Scenario Event" .
+	
+:AgentShutdownEvent
+	a ajan:ModelEvent ;
+	rdfs:label "AgentShutdownEvent" .
+
+:AgentMonitoringEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Agent Monitoring Event" .
+
+:ErrorHandlingEvent
+	a ajan:ModelEvent ;
+	rdfs:label "Error Handling Event" .
