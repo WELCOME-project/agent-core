@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<filter:FilterConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dl="http://www.dfki.de/s2m2/2011/s2m2/inference/dl" xmlns:filter="http://www.dfki.de/s2m2/2011/s2m2" xmlns:isem="http://www.dfki.de/isem/2011/isem" xmlns:libsvm="http://www.dfki.de/isem/2011/isem/learning/libsvm" xmlns:lucene="http://www.dfki.de/s2m2/2011/s2m2/textsim/lucene" xmlns:textsim="http://www.dfki.de/s2m2/2011/s2m2/textsim">
+  <resource xsi:type="isem:iSeMReasoner" preprocessing="true"/>
+  <resource xsi:type="lucene:LuceneMemoryIndex"/>
+  <resource xsi:type="lucene:LuceneMemoryIndex"/>
+  <resource xsi:type="lucene:LuceneMemoryIndex"/>
+  <filter xsi:type="libsvm:LibSVMAggregation">
+    <featureSpace xsi:type="filter:BooleanAsDouble" name="exact">
+      <operand xsi:type="filter:And">
+        <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for inputs">
+          <operand xsi:type="filter:Inverse">
+            <operand xsi:type="filter:GreaterEquals">
+              <leftOperand xsi:type="filter:BipartiteGraphMatching">
+                <valuation xsi:type="filter:BooleanAsDouble">
+                  <operand xsi:type="dl:Equivalence" engine="//@resource.0"/>
+                </valuation>
+              </leftOperand>
+              <rightOperand xsi:type="filter:FixedValue" alpha="1.0"/>
+            </operand>
+          </operand>
+        </operands>
+        <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for outputs" type="Output">
+          <operand xsi:type="filter:GreaterEquals">
+            <leftOperand xsi:type="filter:BipartiteGraphMatching">
+              <valuation xsi:type="filter:BooleanAsDouble">
+                <operand xsi:type="dl:Equivalence" engine="//@resource.0"/>
+              </valuation>
+            </leftOperand>
+            <rightOperand xsi:type="filter:FixedValue" alpha="1.0"/>
+          </operand>
+        </operands>
+      </operand>
+    </featureSpace>
+    <featureSpace xsi:type="filter:BooleanAsDouble" name="plug-in">
+      <operand xsi:type="filter:And">
+        <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for inputs">
+          <operand xsi:type="filter:Inverse">
+            <operand xsi:type="filter:GreaterEquals">
+              <leftOperand xsi:type="filter:BipartiteGraphMatching">
+                <valuation xsi:type="filter:BooleanAsDouble">
+                  <operand xsi:type="dl:Subsumption" engine="//@resource.0"/>
+                </valuation>
+              </leftOperand>
+              <rightOperand xsi:type="filter:FixedValue" alpha="1.0"/>
+            </operand>
+          </operand>
+        </operands>
+        <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for outputs" type="Output">
+          <operand xsi:type="filter:GreaterEquals">
+            <leftOperand xsi:type="filter:BipartiteGraphMatching">
+              <valuation xsi:type="filter:BooleanAsDouble">
+                <operand xsi:type="filter:Inverse">
+                  <operand xsi:type="dl:LeastGenericConcept" engine="//@resource.0"/>
+                </operand>
+              </valuation>
+            </leftOperand>
+            <rightOperand xsi:type="filter:FixedValue" alpha="1.0"/>
+          </operand>
+        </operands>
+      </operand>
+    </featureSpace>
+    <featureSpace xsi:type="filter:BooleanAsDouble" name="subsumes">
+      <operand xsi:type="filter:And">
+        <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for inputs">
+          <operand xsi:type="filter:Inverse">
+            <operand xsi:type="filter:GreaterEquals">
+              <leftOperand xsi:type="filter:BipartiteGraphMatching">
+                <valuation xsi:type="filter:BooleanAsDouble">
+                  <operand xsi:type="dl:Subsumption" engine="//@resource.0"/>
+                </valuation>
+              </leftOperand>
+              <rightOperand xsi:type="filter:FixedValue" alpha="1.0"/>
+            </operand>
+          </operand>
+        </operands>
+        <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for outputs" type="Output">
+          <operand xsi:type="filter:GreaterEquals">
+            <leftOperand xsi:type="filter:BipartiteGraphMatching">
+              <valuation xsi:type="filter:BooleanAsDouble">
+                <operand xsi:type="dl:Subsumption" engine="//@resource.0"/>
+              </valuation>
+            </leftOperand>
+            <rightOperand xsi:type="filter:FixedValue" alpha="1.0"/>
+          </operand>
+        </operands>
+      </operand>
+    </featureSpace>
+    <featureSpace xsi:type="filter:BooleanAsDouble" name="subsumed-by">
+      <operand xsi:type="filter:And">
+        <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for inputs">
+          <operand xsi:type="filter:Inverse">
+            <operand xsi:type="filter:GreaterEquals">
+              <leftOperand xsi:type="filter:BipartiteGraphMatching">
+                <valuation xsi:type="filter:BooleanAsDouble">
+                  <operand xsi:type="dl:Subsumption" engine="//@resource.0"/>
+                </valuation>
+              </leftOperand>
+              <rightOperand xsi:type="filter:FixedValue" alpha="1.0"/>
+            </operand>
+          </operand>
+        </operands>
+        <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for outputs" type="Output">
+          <operand xsi:type="filter:GreaterEquals">
+            <leftOperand xsi:type="filter:BipartiteGraphMatching">
+              <valuation xsi:type="filter:BooleanAsDouble">
+                <operand xsi:type="dl:LeastGenericConcept" engine="//@resource.0"/>
+              </valuation>
+            </leftOperand>
+            <rightOperand xsi:type="filter:FixedValue" alpha="1.0"/>
+          </operand>
+        </operands>
+      </operand>
+    </featureSpace>
+    <featureSpace xsi:type="filter:FixedValue" name="fail" alpha="1.0"/>
+    <featureSpace xsi:type="filter:ServiceLiteralEvaluation" name="unfolded inputs">
+      <operand xsi:type="filter:Concatenation">
+        <operand xsi:type="textsim:Cosine" index="//@resource.1"/>
+      </operand>
+      <types>UnfoldedInput</types>
+    </featureSpace>
+    <featureSpace xsi:type="filter:ServiceLiteralEvaluation" name="unfolded outputs">
+      <operand xsi:type="filter:Concatenation">
+        <operand xsi:type="textsim:Cosine" index="//@resource.2"/>
+      </operand>
+      <types>UnfoldedOutput</types>
+    </featureSpace>
+    <featureSpace xsi:type="filter:ServiceLiteralEvaluation" name="service description">
+      <operand xsi:type="filter:Concatenation">
+        <operand xsi:type="textsim:Cosine" name="" index="//@resource.3"/>
+      </operand>
+      <types>Description</types>
+    </featureSpace>
+    <featureSpace xsi:type="filter:Average" name="structure">
+      <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for inputs">
+        <operand xsi:type="filter:Inverse">
+          <operand xsi:type="filter:BipartiteGraphMatching">
+            <valuation xsi:type="isem:StructuralSimilarity" engine="//@resource.0" alpha="0.2" beta="0.6"/>
+          </operand>
+        </operand>
+      </operands>
+      <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for outputs" type="Output">
+        <operand xsi:type="filter:BipartiteGraphMatching">
+          <valuation xsi:type="isem:StructuralSimilarity" engine="//@resource.0" alpha="0.2" beta="0.6"/>
+        </operand>
+      </operands>
+    </featureSpace>
+  </filter>
+</filter:FilterConfiguration>

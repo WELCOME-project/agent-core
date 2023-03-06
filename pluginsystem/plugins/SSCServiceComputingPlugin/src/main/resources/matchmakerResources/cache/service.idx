@@ -1,0 +1,8 @@
+http\://127.0.0.1/ontology/Service.owl=Service.owl
+http\://127.0.0.1/ontology/Profile.owl=Profile.owl
+http\://127.0.0.1/ontology/Process.owl=Process.owl
+http\://127.0.0.1/ontology/Grounding.owl=Grounding.owl
+http\://127.0.0.1/ontology/Expression.owl=Expression.owl
+http\://127.0.0.1/ontology/ObjectList.owl=ObjectList.owl
+http\://127.0.0.1/ontology/ProfileDeprecatedElements.owl=ProfileDeprecatedElements.owl
+http\://127.0.0.1/ontology/ActorDefault.owl=ActorDefault.owl

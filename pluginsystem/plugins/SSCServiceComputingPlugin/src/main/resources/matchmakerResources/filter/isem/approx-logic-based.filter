@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<filter:FilterConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:filter="http://www.dfki.de/s2m2/2011/s2m2" xmlns:isem="http://www.dfki.de/isem/2011/isem">
+  <resource xsi:type="isem:iSeMReasoner" preprocessing="true"/>
+  <filter xsi:type="filter:Maximum">
+    <operands xsi:type="filter:Average" name="H1">
+      <operands xsi:type="filter:SemanticAnnotationEvaluation" name="inputs">
+        <operand xsi:type="filter:Inverse">
+          <operand xsi:type="filter:BipartiteGraphMatching">
+            <valuation xsi:type="isem:ApproximatedSubsumption" engine="//@resource.0"/>
+          </operand>
+        </operand>
+      </operands>
+      <operands xsi:type="filter:SemanticAnnotationEvaluation" name="approx. plug-in" type="Output">
+        <operand xsi:type="filter:BipartiteGraphMatching">
+          <valuation xsi:type="isem:ApproximatedSubsumption" engine="//@resource.0"/>
+        </operand>
+      </operands>
+    </operands>
+    <operands xsi:type="filter:Average" name="H2">
+      <operands xsi:type="filter:SemanticAnnotationEvaluation" name="inputs">
+        <operand xsi:type="filter:Inverse">
+          <operand xsi:type="filter:BipartiteGraphMatching">
+            <valuation xsi:type="isem:ApproximatedSubsumption" engine="//@resource.0"/>
+          </operand>
+        </operand>
+      </operands>
+      <operands xsi:type="filter:SemanticAnnotationEvaluation" name="approx. subsumed-by" type="Output">
+        <operand xsi:type="filter:BipartiteGraphMatching">
+          <valuation xsi:type="filter:Inverse">
+            <operand xsi:type="isem:ApproximatedSubsumption" engine="//@resource.0"/>
+          </valuation>
+        </operand>
+      </operands>
+    </operands>
+  </filter>
+</filter:FilterConfiguration>

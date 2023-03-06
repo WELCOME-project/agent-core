@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<filter:FilterConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:filter="http://www.dfki.de/s2m2/2011/s2m2" xmlns:isem="http://www.dfki.de/isem/2011/isem">
+  <resource xsi:type="isem:iSeMReasoner" preprocessing="true"/>
+  <filter xsi:type="filter:Average">
+    <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for inputs">
+      <operand xsi:type="filter:Inverse">
+        <operand xsi:type="filter:BipartiteGraphMatching">
+          <valuation xsi:type="isem:StructuralSimilarity" engine="//@resource.0" alpha="0.2" beta="0.6"/>
+        </operand>
+      </operand>
+    </operands>
+    <operands xsi:type="filter:SemanticAnnotationEvaluation" name="for outputs" type="Output">
+      <operand xsi:type="filter:BipartiteGraphMatching">
+        <valuation xsi:type="isem:StructuralSimilarity" engine="//@resource.0" alpha="0.2" beta="0.6"/>
+      </operand>
+    </operands>
+  </filter>
+</filter:FilterConfiguration>

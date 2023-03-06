@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<filter:FilterConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:filter="http://www.dfki.de/s2m2/2011/s2m2" xmlns:lucene="http://www.dfki.de/s2m2/2011/s2m2/textsim/lucene" xmlns:textsim="http://www.dfki.de/s2m2/2011/s2m2/textsim">
+  <resource xsi:type="lucene:LuceneMemoryIndex"/>
+  <filter xsi:type="filter:ServiceLiteralEvaluation" name="signature unfolding">
+    <operand xsi:type="filter:Concatenation">
+      <operand xsi:type="textsim:Cosine" index="//@resource.0"/>
+    </operand>
+    <types>UnfoldedInput</types>
+    <types>UnfoldedOutput</types>
+  </filter>
+</filter:FilterConfiguration>
