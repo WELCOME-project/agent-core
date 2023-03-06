@@ -1,8 +1,0 @@
-de\dfki\asr\ajan\pluginsystem\calculateclosestdistanceplugin\extensions\CalculateCoordinateDistance.class
-de\dfki\asr\ajan\pluginsystem\calculateclosestdistanceplugin\CalculateClosestDistancePlugin.class
-de\dfki\asr\ajan\pluginsystem\calculateclosestdistanceplugin\exception\URISyntaxException.class
-de\dfki\asr\ajan\pluginsystem\calculateclosestdistanceplugin\vocabularies\ClosestDistanceVocabulary.class
-de\dfki\asr\ajan\pluginsystem\calculateclosestdistanceplugin\exception\ConditionEvaluationException.class
-META-INF\extensions.idx
-de\dfki\asr\ajan\pluginsystem\calculateclosestdistanceplugin\exception\QueryEvaluationException.class
-de\dfki\asr\ajan\pluginsystem\calculateclosestdistanceplugin\extensions\package-info.class
