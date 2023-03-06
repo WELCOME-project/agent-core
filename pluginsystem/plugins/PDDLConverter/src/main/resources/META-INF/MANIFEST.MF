@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: elena
+Build-Jdk: 1.8.0_91
+Plugin-Class: de.dfki.asr.ajan.pluginsystem.pddlconverter.CreatePDDLPlugin
+Plugin-Id: CreatePDDLPlugin
+Plugin-Provider: DFKI
+Plugin-Version: 0.0.1

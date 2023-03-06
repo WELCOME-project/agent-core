@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: elena
+Build-Jdk: 1.8.0_91
+Plugin-Class: de.dfki.asr.ajan.pluginsystem.sscpddl2sparql.CreatePDDL2SPARQL
+Plugin-Id: CreatePDDL2SPARQL
+Plugin-Provider: DFKI
+Plugin-Version: 0.0.1
