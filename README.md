@@ -16,6 +16,8 @@ You will need the following things properly installed on your computer.
 * cmd: `git clone <repository-url>` this repository
 * cmd: `cd AJAN-service`
 * cmd: `git submodule update --init --recursive`
+* download "isem.zip" from https://cloud.dfki.de/owncloud/index.php/s/HAw6KEezgBdKGPn .Unzip and locate the folder in 
+									AJAN-service-master\pluginsystem\plugins\SSCServiceComputingPlugin\lib
 * run `installAJAN.bat` or cmd: `mvn install`
 
 ## Setup Triplestore
